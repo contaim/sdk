@@ -1,0 +1,14 @@
+version: v1beta1
+build:
+  roots:
+    - .
+  excludes:
+    - vendor
+lint:
+  use:
+    - DEFAULT
+  allow_comment_ignores: true
+  ignore_only:
+breaking:
+  use:
+    - WIRE_JSON

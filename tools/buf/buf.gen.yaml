@@ -1,0 +1,11 @@
+version: v1beta1
+
+plugins:
+  - name: go
+    out: .
+    opt:
+      "Mprotos/hclspec/v1/hcl_spec.proto=github.com/contaim/sdk/protos/hclspec/v1;hclspec,\
+      Mprotos/fields/v1/fields.proto=github.com/contaim/sdk/protos/fields/v1;fields,\
+      Mprotos/attribute/v1/attribute.proto=github.com/contaim/sdk/protos/attribute/v1;attribute"
+  - name: go-grpc
+    out: .

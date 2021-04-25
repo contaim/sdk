@@ -1,0 +1,16 @@
+syntax = "proto3";
+package protos.attribute.v1;
+option go_package = "protos/attribute/v1;attribute";
+
+// Attribute is used as an attribute with optional units.
+message Attribute {
+  oneof value {
+    double float_val = 1;
+    int64 int_val = 2;
+    string string_val = 3;
+    bool bool_val = 4;
+  }
+
+  // unit is the unit type, such as MB, GB, etc.
+  string unit = 5;
+}

@@ -1,0 +1,56 @@
+syntax = "proto3";
+package protos.fields.v1;
+option go_package = "protos/fields/v1;fields";
+
+message Spec {
+  repeated Field field = 1;
+}
+
+message Field {
+  oneof field {
+    Text text = 1;
+    Textarea textarea = 2;
+    Number number = 3;
+    Checkbox checkbox = 4;
+  }
+}
+
+message Validator {
+  bool required = 1;
+  int32 min = 2;
+  int32 max = 3;
+  bool custom = 4;
+}
+
+message Base {
+  Validator validator = 1;
+  string name = 2;
+  string label = 3;
+  string help = 4;
+}
+
+message Text {
+  Base base = 1;
+  string default = 2;
+  int32 minlength = 3;
+  int32 maxlength = 4;
+}
+
+message Textarea {
+  Base base = 1;
+  string default = 2;
+}
+
+message Number {
+  Base base = 1;
+  int32 default = 2;
+  int32 min = 3;
+  int32 max = 4;
+  int32 step = 5;
+}
+
+message Checkbox {
+  Base base = 1;
+  bool default = 2;
+}
+

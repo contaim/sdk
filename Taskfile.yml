@@ -1,0 +1,10 @@
+# https://taskfile.dev
+
+version: "3"
+
+tasks:
+  proto:
+    cmds:
+      - echo "--> Generating proto bindings..."
+      - buf --config tools/buf/buf.yaml --template tools/buf/buf.gen.yaml generate
+    silent: true

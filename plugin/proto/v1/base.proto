@@ -1,0 +1,65 @@
+syntax = "proto3";
+package plugin.proto.v1;
+option go_package = "plugin/proto/v1;proto";
+
+import "protos/hclspec/v1/hcl_spec.proto";
+
+service BasePluginService {
+  rpc PluginInfo(PluginInfoRequest) returns (PluginInfoResponse) {}
+  rpc ConfigSchema(ConfigSchemaRequest) returns (ConfigSchemaResponse) {}
+  rpc SetConfig(SetConfigRequest) returns (SetConfigResponse) {}
+}
+
+enum PluginRuntime {
+  PLUGIN_RUNTIME_UNSPECIFIED = 0;
+  PLUGIN_RUNTIME_DAEMON = 1;
+  PLUGIN_RUNTIME_SERVER = 3;
+}
+
+enum DaemonPluginType {
+  DAEMON_PLUGIN_TYPE_UNSPECIFIED = 0;
+  DAEMON_PLUGIN_TYPE_DRIVER = 1;
+}
+
+enum ServerPluginType {
+  SERVER_PLUGIN_TYPE_UNSPECIFIED = 0;
+  SERVER_PLUGIN_TYPE_BUILDER = 1;
+}
+
+message PluginInfoRequest {}
+
+message PluginInfoResponse {
+  PluginRuntime    runtime                    = 1;
+  DaemonPluginType daemon_type                 = 2;
+  ServerPluginType server_type                = 3;
+  repeated         string plugin_api_versions = 4;
+  string           plugin_version             = 5;
+  string           name                       = 6;
+}
+
+message ConfigSchemaRequest {}
+
+message ConfigSchemaResponse {
+  .protos.hclspec.v1.Spec spec = 1;
+}
+
+message DaemonConfig {
+  DaemonDriverConfig driver = 1;
+}
+
+message DaemonDriverConfig {}
+
+message ServerConfig {
+  ServerBuilderConfig builder = 1;
+}
+
+message ServerBuilderConfig {}
+
+message SetConfigRequest {
+  DaemonConfig daemon_runtime_config  = 1;
+  ServerConfig server_runtime_config = 2;
+  bytes        plugin_config         = 3;
+  string       plugin_api_version    = 4;
+}
+
+message SetConfigResponse {}
