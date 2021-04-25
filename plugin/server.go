@@ -10,6 +10,7 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/contaim/sdk/plugin/errs"
 	"github.com/contaim/sdk/plugin/proto/v1"
 	"github.com/hashicorp/go-plugin"
 )
@@ -71,7 +72,7 @@ func (b *basePluginServer) PluginInfo(context.Context, *proto.PluginInfoRequest)
 	case RuntimeModeServer:
 		return b.serverPluginInfo(res)
 	default:
-		return nil, ErrPluginInvalidRuntime
+		return nil, errs.ErrPluginInvalidRuntime
 	}
 }
 

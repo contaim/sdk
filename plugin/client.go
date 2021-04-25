@@ -9,6 +9,7 @@ package plugin
 import (
 	"context"
 
+	"github.com/contaim/sdk/plugin/errs"
 	"github.com/contaim/sdk/plugin/proto/v1"
 	"github.com/contaim/sdk/protos/hclspec/v1"
 	"github.com/contaim/sdk/utils/grpcutil"
@@ -71,7 +72,7 @@ func (b *BasePluginClient) PluginInfo() (*PluginInfoResponse, error) {
 	case proto.PluginRuntime_PLUGIN_RUNTIME_DAEMON:
 		return b.daemonPluginInfo(res)
 	default:
-		return nil, ErrPluginInvalidRuntime
+		return nil, errs.ErrPluginInvalidRuntime
 	}
 }
 
